@@ -1,0 +1,7 @@
+
+Anotações Material-UI
+- variant:
+- component: realmente aplicado no codigo HTML importante para a semantica
+
+
+Eu sei que existe um default theme, basta saber como alterar ele
