@@ -1,11 +1,18 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import store from './store';
+
+import Pedidos from './containers/Pedidos';
 
 function App() {
   return (
     <Provider store={store}>
-      <div>Dashboard</div>
+      <Router>
+        <div>
+          <Route path="/" exact component={Pedidos} />
+        </div>
+      </Router>
     </Provider>
   );
 }
