@@ -1,22 +1,20 @@
-/* eslint-disable react/prefer-stateless-function */
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
+import { Box } from '../../components/foundation/layout/Box';
+import BarraTopo from './BarraTopo';
+import Menu from './Menu';
 
-// eslint-disable-next-line no-unused-vars
-class Dashboard extends React.Component {
-  render() {
-    return (
-      <div className="flex horizontal">
-        <div className="flex vertical">
-          <p>Menu</p>
-        </div>
-        <div className="flex vertical">
-          <div className="flex horizontal">Barra Topo</div>
-          <div className="flex">{this.props.children}</div>
-        </div>
-      </div>
-    );
-  }
+export default function Dashboard({ children, history }) {
+  return (
+    <Box display="flex" height="100vh">
+      <Box display="flex" flex-direction="vertical">
+        <Menu history={history} />
+      </Box>
+      <Box display="flex" flexDirection="column" width="100%">
+        <BarraTopo />
+        <Box display="flex" height="100vh">
+          {children}
+        </Box>
+      </Box>
+    </Box>
+  );
 }
-
-export default Dashboard;
