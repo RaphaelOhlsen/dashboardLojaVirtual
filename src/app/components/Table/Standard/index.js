@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Wrapper } from './styles';
+import Button from '../../Button';
 
 export default function Standard({ header, data }) {
-  console.log(data);
   return (
-    <div className="Tabela Simples">
-      <table className="simples">
+    <Wrapper>
+      <table>
         <thead>
           <tr>
             {header.map((item, idx) => (
@@ -17,19 +17,23 @@ export default function Standard({ header, data }) {
           {data.map((line, idx) => (
             <tr key={`tr-${idx}`}>
               {header.map((item, index) => (
-                <td key={`td-${index}`}>{line[item] || 'teste'}</td>
+                <td key={`td-${index}`}>{line[item]}</td>
               ))}
               {line.botaoDetalhes && (
                 <td>
-                  <Link to={line.botaoDetalhes}>
-                    <button type="button">DETALHES</button>
-                  </Link>
+                  <Button
+                    variant="tertiary.main"
+                    href={line.botaoDetalhes}
+                    small
+                  >
+                    Detalhes
+                  </Button>
                 </td>
               )}
             </tr>
           ))}
         </tbody>
       </table>
-    </div>
+    </Wrapper>
   );
 }

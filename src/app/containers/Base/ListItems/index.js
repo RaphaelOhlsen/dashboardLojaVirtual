@@ -38,7 +38,7 @@ const items = [
   },
   {
     id: 6,
-    route: '/Perfil',
+    route: '/perfil',
     icon: <i className="fas fa-user" />,
     title: 'Perfil',
   },
@@ -46,16 +46,11 @@ const items = [
 
 export default function ListItems({ open, history }) {
   const activeLocal = history.location.pathname;
-  console.log(activeLocal);
   return (
-    <div className="items-wrapper">
+    <Box marginTop="10px">
       {items.map((item) => (
         <Link to={item.route} key={`link-${item.id}`}>
-          <Item
-            route={item.route}
-            activeLocal={activeLocal}
-            className="menu-item"
-          >
+          <Item route={item.route} activeLocal={activeLocal}>
             <Box
               display="flex"
               flex="1"
@@ -77,6 +72,6 @@ export default function ListItems({ open, history }) {
           </Item>
         </Link>
       ))}
-    </div>
+    </Box>
   );
 }

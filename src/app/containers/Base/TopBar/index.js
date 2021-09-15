@@ -1,9 +1,10 @@
 import React from 'react';
 import { Box } from '../../../components/foundation/layout/Box';
+import { Wrapper } from './styles';
 
-export default function BarraTopo() {
+export default function TopBar() {
   return (
-    <Box display="flex" width="100%">
+    <Wrapper>
       <Box
         display="flex"
         flex="1"
@@ -20,6 +21,6 @@ export default function BarraTopo() {
       >
         <p>Sair</p>
       </Box>
-    </Box>
+    </Wrapper>
   );
 }

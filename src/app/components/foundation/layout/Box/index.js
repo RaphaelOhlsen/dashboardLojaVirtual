@@ -6,6 +6,7 @@ export const Box = styled.div`
   ${propToStyle('display')}
   ${propToStyle('flexDirection')}
   ${propToStyle('justifyContent')}
+  ${propToStyle('alignItems')}
   ${propToStyle('flexWrap')}
   ${propToStyle('backgroundColor')}
   ${propToStyle('backgroundImage')}
@@ -24,6 +25,7 @@ export const Box = styled.div`
   ${propToStyle('height')}
 
   ${propToStyle('width')}
+  ${propToStyle('minWidth')}
   ${propToStyle('listStyle')}
   ${propToStyle('margin')}
   ${propToStyle('marginLeft')}

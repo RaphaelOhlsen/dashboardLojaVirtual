@@ -11,7 +11,7 @@ export default function Menu({ history }) {
   }
 
   return (
-    <Wrapper open={open} className="Menu">
+    <Wrapper open={open}>
       <TopItem open={open} onClick={() => toogleOpen()}>
         <i className={`fas fa-arrow-${open ? 'left' : 'right'}`} />
       </TopItem>

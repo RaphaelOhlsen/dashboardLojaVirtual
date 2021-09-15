@@ -1,11 +1,23 @@
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import theme from '../../theme';
 import Base from '../Base';
+import GlobalStyle from '../../theme/GlobalStyle';
 
-const base = (Component) => (props) =>
+export const base = (Component) => (props) =>
   (
-    <Base history={props.history}>
-      <Component {...props} />
-    </Base>
+    <ThemeProvider theme={theme}>
+      <Base history={props.history}>
+        <GlobalStyle />
+        <Component {...props} />
+      </Base>
+    </ThemeProvider>
   );
 
-export default base;
+export const page = (Component) => (props) =>
+  (
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Component {...props} />
+    </ThemeProvider>
+  );
