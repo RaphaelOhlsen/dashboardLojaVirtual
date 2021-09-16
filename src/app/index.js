@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 
 import { HashRouter as Router, Route } from 'react-router-dom';
 
 import store from './store';
 import { base, page } from './containers/HOC';
+
+import { initApp } from './actions';
 
 import Orders from './containers/Orders';
 import Order from './containers/Order';
@@ -26,6 +28,10 @@ import RecoverPassword from './containers/RecoverPassord';
 import ResetPassword from './containers/RecoverPassord/ResetPassword';
 
 function App() {
+  useEffect(() => {
+    initApp();
+  }, []);
+
   return (
     <Provider store={store}>
       <Router>

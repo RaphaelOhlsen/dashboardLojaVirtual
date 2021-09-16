@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import { connect } from 'react-redux';
 import Titulo from '../../components/Texto/Titulo';
 import Input from '../../components/Inputs/Standard';
 import Checkbox from '../../components/Inputs/Checkbox';
@@ -8,21 +9,30 @@ import Link from '../../components/Link';
 import { Box } from '../../components/foundation/layout/Box';
 import { Card } from '../../components/Card';
 
-export default function Login() {
+import * as actions from '../../actions';
+
+import { api, versao } from '../../config';
+
+function Login(props) {
   const [state, setState] = useState({
     email: '',
     password: '',
-    rememberOption: false,
+    rememberOption: true,
   });
   const { email, password, rememberOption } = state;
 
-  function onChangeInput(field, ev) {
-    return setState({ [field]: ev.target.value });
-  }
+  const onChangeInput = (field, ev) =>
+    setState({ ...state, [field]: ev.target.value });
 
-  function onChangeCheckBox() {
-    return setState({ rememberOption: !rememberOption });
-  }
+  const onChangeCheckBox = () =>
+    setState({ ...state, rememberOption: !rememberOption });
+
+  const handleLogin = () => {
+    props.handleLogin({ email, password, rememberOption }, () => {
+      alert('aviso');
+    });
+  };
+
   return (
     <Box
       display="flex"
@@ -73,15 +83,30 @@ export default function Login() {
             />
           </Box>
           <Box display="flex" flex="1" justifyContent="flex-end">
-            <Link to="/recuperar-senha" fontSize="12px" fontWeight="700">
+            {/* <Link to="/recuperar-senha" fontSize="12px" fontWeight="700">
               Esqueceu sua senha?
+            </Link> */}
+            <Link
+              external
+              to={`${api}/${versao}/api/usuarios/recuperar-senha`}
+              fontSize="12px"
+              fontWeight="700"
+            >
+              Esqueceu usa senha?
             </Link>
           </Box>
         </Box>
-        <Button margin="20px 0 0" variant="secondary.main" href="/" fullWidth>
+        <Button
+          onClick={() => handleLogin()}
+          margin="20px 0 0"
+          variant="secondary.main"
+          fullWidth
+        >
           Entrar
         </Button>
       </Card>
     </Box>
   );
 }
+
+export default connect(null, actions)(Login);
