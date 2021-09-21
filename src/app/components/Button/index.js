@@ -50,6 +50,7 @@ const ButtonWrapper = styled.button`
       css`
         opacity: 0.5;
       `}
+    color: ${({ hover }) => hover}
   }
   &:disabled {
     cursor: not-allowed;
@@ -69,13 +70,17 @@ const Button = ({ href, children, name, goback, ...props }) => {
   }
   if (href) {
     return (
-      <Link to={href} color2="red">
+      <Link to={href}>
         <ButtonWrapper {...props}>{children}</ButtonWrapper>
       </Link>
     );
   }
 
-  return <ButtonWrapper {...props}>{children}</ButtonWrapper>;
+  return (
+    <Link to={href}>
+      <ButtonWrapper {...props}>{children}</ButtonWrapper>
+    </Link>
+  );
 };
 
 export default Button;

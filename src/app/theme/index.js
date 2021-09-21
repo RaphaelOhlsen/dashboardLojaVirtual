@@ -36,6 +36,7 @@ const colors = {
   black: {
     main: {
       color: '#000',
+      contrastText: '#118311',
     },
   },
   white: {

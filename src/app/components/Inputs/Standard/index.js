@@ -40,6 +40,7 @@ export default function Standard({
   value,
   onChange,
   onKeyPress,
+  error,
   ...props
 }) {
   return (

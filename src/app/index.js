@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { HashRouter as Router, Route } from 'react-router-dom';
 
 import store from './store';
-import { base, page } from './containers/HOC';
+import { base, noAuth } from './containers/HOC';
 
 import { initApp } from './actions';
 
@@ -57,9 +57,12 @@ function App() {
 
           <Route path="/teste" component={base(Teste)} />
 
-          <Route path="/login" component={page(Login)} />
-          <Route path="/recuperar-senha" component={page(RecoverPassword)} />
-          <Route path="/resetar-senha/:token" component={page(ResetPassword)} />
+          <Route path="/login" component={noAuth(Login)} />
+          <Route path="/recuperar-senha" component={noAuth(RecoverPassword)} />
+          <Route
+            path="/resetar-senha/:token"
+            component={noAuth(ResetPassword)}
+          />
         </div>
       </Router>
     </Provider>

@@ -1,10 +1,12 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
 /* eslint-disable func-names */
 import axios from 'axios';
-import { LOGIN_USER } from './types';
+import { LOGIN_USER, LOGOUT_USER } from './types';
 import { api, versao } from '../config';
 
 const saveToken = (usuario, rememberOption) => {
+  console.log('SaveToken: ', usuario.token);
   if (!usuario.token) return null;
   const [token1, token2, token3] = usuario.token.split('.');
   localStorage.setItem('token1', token1);
@@ -25,19 +27,31 @@ const getToken = () => {
   const token1 = localStorage.getItem('token1');
   const token2 = localStorage.getItem('token2');
   const token3 = localStorage.getItem('token3');
-  if (!token1 || token2 || token3) return null;
+  if (!token1 || !token2 || !token3) return null;
   return `${token1}.${token2}.${token3}`;
 };
 
 const getHeaders = () => ({
-  Headers: {
-    Authorization: `Ecommerce ${getToken()}`,
+  "headers": {
+    "authorization": `Ecommerce ${getToken()}`,
   },
 });
 
 const initApp = () => {
   const rememberOption = localStorage.getItem('rememberOption');
   if (rememberOption === 'false') cleanToken();
+};
+
+const getRememberOption = () => {
+  const rememberOption = localStorage.getItem('rememberOption');
+  if (
+    rememberOption === 'false' ||
+    rememberOption === null ||
+    rememberOption === undefined
+  ) {
+    return false;
+  }
+  return true;
 };
 
 // USUARIOS
@@ -54,4 +68,22 @@ const handleLogin = ({ email, password, rememberOption }, callback) =>
       });
   };
 
-export { handleLogin, initApp };
+const getUser = () =>
+  function (dispatch) {
+    axios
+      .get(`${api}/${versao}/api/usuarios/`, getHeaders())
+      .then((res) => {
+        saveToken(res.data.usuario, true);
+        dispatch({ type: LOGIN_USER, payload: res.data });
+      })
+      .catch((err) => {
+        console.log(err, err.response.data);
+      });
+  };
+
+const handleLogout = () => {
+  cleanToken();
+  return { type: LOGOUT_USER };
+};
+
+export { handleLogin, handleLogout, getUser, initApp, getRememberOption };

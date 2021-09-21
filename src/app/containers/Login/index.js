@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import Titulo from '../../components/Texto/Titulo';
 import Input from '../../components/Inputs/Standard';
@@ -18,11 +17,18 @@ function Login(props) {
     email: '',
     password: '',
     rememberOption: true,
+    errors: {},
   });
-  const { email, password, rememberOption } = state;
 
-  const onChangeInput = (field, ev) =>
+  useEffect(() => {
+    setState({ ...state, rememberOption: actions.getRememberOption() });
+  }, []);
+
+  const { email, password, rememberOption, errors } = state;
+
+  const onChangeInput = (field, ev) => {
     setState({ ...state, [field]: ev.target.value });
+  };
 
   const onChangeCheckBox = () =>
     setState({ ...state, rememberOption: !rememberOption });
@@ -62,6 +68,7 @@ function Login(props) {
           label="E-mail"
           value={email}
           type="email"
+          error={errors.email}
           onChange={(ev) => onChangeInput('email', ev)}
           direction="column"
           margin="0 0 10px"
@@ -70,6 +77,7 @@ function Login(props) {
           label="Senha"
           value={password}
           type="password"
+          error={errors.password}
           onChange={(ev) => onChangeInput('password', ev)}
           direction="column"
           margin="0 0 30px"

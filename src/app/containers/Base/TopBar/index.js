@@ -1,8 +1,10 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { Box } from '../../../components/foundation/layout/Box';
 import { Wrapper } from './styles';
+import Button from '../../../components/Button';
 
-export default function TopBar() {
+export default function TopBar({ handleLogout }) {
   return (
     <Wrapper>
       <Box
@@ -19,7 +21,14 @@ export default function TopBar() {
         justifyContent="flex-end"
         alignItems="center"
       >
-        <p>Sair</p>
+        <Button
+          onClick={() => handleLogout()}
+          padding="0"
+          variant="black.main"
+          hover="red"
+        >
+          <i className="fa fa-power-off" />
+        </Button>
       </Box>
     </Wrapper>
   );

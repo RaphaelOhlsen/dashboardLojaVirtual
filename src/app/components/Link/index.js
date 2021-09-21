@@ -26,5 +26,5 @@ export default function Link({ external, to, ...props }) {
   if (external) {
     return <WrapperAnchor href={to} {...props} />;
   }
-  return <WrapperLink {...props} />;
+  return <WrapperLink to={to} {...props} />;
 }

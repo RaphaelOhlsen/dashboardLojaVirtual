@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { combineReducers } from 'redux';
 
+import authReducer from './auth_reducer';
+
 const reducers = combineReducers({
-  root: (state, action) => state || {},
+  auth: authReducer,
 });
 
 export default reducers;
